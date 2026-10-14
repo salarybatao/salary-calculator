@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salary Calculator - SalaryBatao</title>
+<style>
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #f3f6fb;
+  color: #172033;
+}
+.container {
+  max-width: 650px;
+  margin: 30px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 5px 25px #0001;
+}
+h1 { color: #174ea6; }
+label {
+  display: block;
+  margin-top: 18px;
+  font-weight: bold;
+}
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 7px;
+  box-sizing: border-box;
+  border: 1px solid #ccd3df;
+  border-radius: 7px;
+  font-size: 16px;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 22px;
+  border: 0;
+  border-radius: 7px;
+  background: #174ea6;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+.result {
+  margin-top: 22px;
+  padding: 18px;
+  background: #eaf3ff;
+  border-radius: 9px;
+}
+.result h2 { color: #137547; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Salary Calculator 2026</h1>
+  <p>Calculate your estimated monthly salary from annual CTC.</p>
+
+  <label for="ctc">Annual CTC (₹)</label>
+  <input id="ctc" type="number" min="0"
+         value="600000">
+
+  <label for="pf">Employee PF deduction per month (₹)</label>
+  <input id="pf" type="number" min="0" value="2400">
+
+  <label for="tax">Income tax per month (₹)</label>
+  <input id="tax" type="number" min="0" value="0">
+
+  <label for="other">Other monthly deductions (₹)</label>
+  <input id="other" type="number" min="0" value="200">
+
+  <button onclick="calculateSalary()">
+    Calculate My Salary
+  </button>
+
+  <div class="result" aria-live="polite">
+    <p>Annual CTC: <strong id="annual">₹6,00,000</strong></p>
+    <p>Monthly CTC: <strong id="monthly">₹50,000</strong></p>
+    <h2>Estimated Monthly In-Hand</h2>
+    <h2 id="net">₹47,400</h2>
+  </div>
+
+  <p><small>Estimate only. This simple version treats CTC divided by 12 as monthly gross pay. Actual in-hand salary may differ because employer PF, gratuity, bonuses and other CTC components may not be paid monthly.</small></p>
+</div>
+
+<script>
+function money(n) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0
+  }).format(n);
+}
+
+function calculateSalary() {
+  const ctc = Number(document.getElementById("ctc").value);
+  const pf = Number(document.getElementById("pf").value);
+  const tax = Number(document.getElementById("tax").value);
+  const other = Number(document.getElementById("other").value);
+
+  if (![ctc, pf, tax, other].every(
+    n => Number.isFinite(n) && n >= 0
+  ) || ctc <= 0) {
+    alert("Please enter valid positive salary values.");
+    return;
+  }
+
+  const monthly = ctc / 12;
+  const net = monthly - pf - tax - other;
+
+  document.getElementById("annual").textContent = money(ctc);
+  document.getElementById("monthly").textContent = money(monthly);
+  document.getElementById("net").textContent = money(net);
+}
+
+calculateSalary();
+</script>
+</body>
+</html>

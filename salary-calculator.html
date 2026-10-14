@@ -3,558 +3,122 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Free SalaryBatao salary calculator to estimate monthly take-home pay from CTC with PF, gratuity, tax and deductions.">
-<title>Salary Calculator 2026 | SalaryBatao</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salary Calculator - SalaryBatao</title>
 <style>
-:root {
-  --blue:#174ea6;
-  --ink:#172033;
-  --muted:#667085;
-  --line:#e1e7ef;
-  --bg:#f4f7fb;
-  --green:#087443;
-}
-* { box-sizing:border-box; }
 body {
-  margin:0;
-  background:var(--bg);
-  font-family:Arial,sans-serif;
-  color:var(--ink);
-  line-height:1.5;
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #f3f6fb;
+  color: #172033;
 }
-header {
-  background:#fff;
-  border-bottom:1px solid var(--line);
+.container {
+  max-width: 650px;
+  margin: 30px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 5px 25px #0001;
 }
-.nav {
-  max-width:1120px;
-  margin:auto;
-  padding:18px 22px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-.brand {
-  font-size:23px;
-  font-weight:800;
-  color:var(--blue);
-  text-decoration:none;
-}
-.brand span { color:#172033; }
-.nav small { color:var(--muted); }
-main {
-  max-width:1120px;
-  margin:28px auto;
-  padding:0 18px 40px;
-}
-.hero { margin-bottom:22px; }
-.hero h1 {
-  font-size:clamp(28px,4vw,40px);
-  line-height:1.15;
-  margin:0 0 9px;
-}
-.hero p { color:var(--muted); }
-.layout {
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:20px;
-  align-items:start;
-}
-.card {
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:23px;
-  box-shadow:0 4px 16px #17203308;
-}
-.card h2 { font-size:20px; margin:0 0 5px; }
-.sub { color:var(--muted); font-size:13px; margin-bottom:18px; }
-.field-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
+h1 { color: #174ea6; }
 label {
-  display:block;
-  font-weight:650;
-  font-size:13px;
-  margin-bottom:7px;
+  display: block;
+  margin-top: 18px;
+  font-weight: bold;
 }
 input {
-  width:100%;
-  padding:12px;
-  border:1px solid #ccd5e2;
-  border-radius:9px;
-  font:inherit;
-  color:var(--ink);
-  background:#fff;
-  min-width:0;
-}
-input:focus {
-  outline:2px solid #bfd5ff;
-  border-color:var(--blue);
-}
-input[type=range] {
-  padding:0;
-  accent-color:var(--blue);
-  margin-top:10px;
-}
-.full { grid-column:1/-1; }
-.range-line {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-top:8px;
-  color:var(--muted);
-  font-size:12px;
-}
-.button-row {
-  display:flex;
-  gap:10px;
-  margin-top:20px;
-  flex-wrap:wrap;
+  width: 100%;
+  padding: 12px;
+  margin-top: 7px;
+  box-sizing: border-box;
+  border: 1px solid #ccd3df;
+  border-radius: 7px;
+  font-size: 16px;
 }
 button {
-  border:0;
-  border-radius:9px;
-  padding:12px 16px;
-  font:inherit;
-  font-weight:700;
-  cursor:pointer;
+  width: 100%;
+  padding: 14px;
+  margin-top: 22px;
+  border: 0;
+  border-radius: 7px;
+  background: #174ea6;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
-.primary { background:var(--blue); color:#fff; flex:1; }
-.secondary { background:#edf2f8; color:var(--ink); }
-.results { position:sticky; top:15px; }
-.result-hero {
-  background:linear-gradient(135deg,#eaf2ff,#f3f8ff);
-  border:1px solid #d6e5ff;
-  padding:19px;
-  border-radius:12px;
-  margin:16px 0;
+.result {
+  margin-top: 22px;
+  padding: 18px;
+  background: #eaf3ff;
+  border-radius: 9px;
 }
-.result-hero .label { font-size:13px; color:#45556f; }
-.amount {
-  font-size:clamp(29px,4vw,38px);
-  font-weight:800;
-  color:var(--green);
-  margin:3px 0;
-  overflow-wrap:anywhere;
-}
-.pill {
-  display:inline-block;
-  background:#dff5e9;
-  color:#11633b;
-  padding:4px 9px;
-  border-radius:99px;
-  font-size:12px;
-  font-weight:700;
-}
-.metric-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-bottom:17px;
-}
-.metric {
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:12px;
-}
-.metric span { display:block; color:var(--muted); font-size:12px; }
-.metric strong { display:block; font-size:18px; margin-top:3px; overflow-wrap:anywhere; }
-.breakdown-title { margin:18px 0 7px; font-size:15px; }
-.row {
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  padding:10px 0;
-  border-bottom:1px solid #edf0f5;
-  font-size:14px;
-}
-.row span { color:#526075; }
-.row strong { text-align:right; }
-.bar {
-  height:11px;
-  display:flex;
-  overflow:hidden;
-  border-radius:20px;
-  background:#e8edf4;
-  margin:13px 0 8px;
-}
-.bar span { height:100%; }
-.legend {
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  color:var(--muted);
-  font-size:12px;
-}
-.dot {
-  display:inline-block;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  margin-right:5px;
-}
-.note {
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.6;
-  margin-top:17px;
-}
-.extras {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:13px;
-  margin-top:20px;
-}
-.mini {
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:17px;
-}
-.mini h3 { font-size:15px; margin:0 0 6px; }
-.mini p { font-size:13px; color:var(--muted); margin:0; }
-footer {
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  padding:20px;
-}
-@media(max-width:800px) {
-  .layout { grid-template-columns:1fr; }
-  .results { position:static; }
-  .extras { grid-template-columns:1fr; }
-}
-@media(max-width:520px) {
-  .nav { padding:15px; }
-  .nav small { display:none; }
-  main { margin-top:20px; padding:0 12px 28px; }
-  .card { padding:17px; }
-  .field-grid { grid-template-columns:1fr; }
-  .full { grid-column:auto; }
-  .metric strong { font-size:16px; }
-}
-@media print {
-  body { background:#fff; }
-  .nav,form,.button-row,footer,.extras { display:none!important; }
-  main { margin:0; padding:0; }
-  .layout { display:block; }
-  .card { box-shadow:none; border:0; padding:0; }
-  .results { position:static; }
-}
+.result h2 { color: #137547; }
 </style>
 </head>
 <body>
-
-<header>
-  <div class="nav">
-    <a class="brand" href="#" aria-label="SalaryBatao home">
-      Salary<span>Batao</span>
-    </a>
-    <small>Simple salary insights for India</small>
-  </div>
-</header>
-
-<main>
-<section class="hero">
+<div class="container">
   <h1>Salary Calculator 2026</h1>
-  <p>Estimate your monthly in-hand salary from CTC with a clear salary breakup.</p>
-</section>
+  <p>Calculate your estimated monthly salary from annual CTC.</p>
 
-<div class="layout">
+  <label for="ctc">Annual CTC (₹)</label>
+  <input id="ctc" type="number" min="0"
+         value="600000">
 
-<section class="card">
-<h2>Enter your salary details</h2>
-<p class="sub">Change the values to update your estimate instantly.</p>
+  <label for="pf">Employee PF deduction per month (₹)</label>
+  <input id="pf" type="number" min="0" value="2400">
 
-<form id="salaryForm">
-<div class="field-grid">
+  <label for="tax">Income tax per month (₹)</label>
+  <input id="tax" type="number" min="0" value="0">
 
-<div>
-<label for="ctc">Annual CTC (₹)</label>
-<input id="ctc" type="number" min="1" max="1000000000" step="1000" value="800000" required>
-</div>
+  <label for="other">Other monthly deductions (₹)</label>
+  <input id="other" type="number" min="0" value="200">
 
-<div>
-<label for="bonus">Annual variable pay / bonus (₹)</label>
-<input id="bonus" type="number" min="0" value="50000" step="1000">
-</div>
+  <button onclick="calculateSalary()">
+    Calculate My Salary
+  </button>
 
-<div>
-<label for="basicPct">Basic salary (% of CTC)</label>
-<input id="basicPct" type="number" min="0" max="100" value="40" step="1">
-</div>
+  <div class="result" aria-live="polite">
+    <p>Annual CTC: <strong id="annual">₹6,00,000</strong></p>
+    <p>Monthly CTC: <strong id="monthly">₹50,000</strong></p>
+    <h2>Estimated Monthly In-Hand</h2>
+    <h2 id="net">₹47,400</h2>
+  </div>
 
-<div>
-<label for="employerPF">Employer PF included in CTC (₹/year)</label>
-<input id="employerPF" type="number" min="0" value="28800" step="100">
+  <p><small>Estimate only. This simple version treats CTC divided by 12 as monthly gross pay. Actual in-hand salary may differ because employer PF, gratuity, bonuses and other CTC components may not be paid monthly.</small></p>
 </div>
-
-<div>
-<label for="gratuity">Gratuity included in CTC (₹/year)</label>
-<input id="gratuity" type="number" min="0" value="11540" step="100">
-</div>
-
-<div>
-<label for="employeePF">Employee PF deduction (₹/month)</label>
-<input id="employeePF" type="number" min="0" value="2400" step="100">
-</div>
-
-<div>
-<label for="tax">Estimated income tax (₹/year)</label>
-<input id="tax" type="number" min="0" value="0" step="100">
-</div>
-
-<div>
-<label for="pt">Professional tax (₹/month)</label>
-<input id="pt" type="number" min="0" value="200" step="50">
-</div>
-
-<div class="full">
-<label for="other">Other deductions (₹/month)</label>
-<input id="other" type="number" min="0" value="0" step="100">
-</div>
-
-<div class="full">
-<label for="ctcRange">Adjust annual CTC quickly</label>
-<input id="ctcRange" type="range" min="100000" max="5000000" step="50000" value="800000">
-<div class="range-line">
-<span>₹1 LPA</span>
-<strong id="rangeValue">₹8,00,000</strong>
-<span>₹50 LPA</span>
-</div>
-</div>
-
-</div>
-
-<div class="button-row">
-<button class="primary" type="submit">Calculate salary</button>
-<button class="secondary" type="button" id="reset">Reset</button>
-</div>
-</form>
-
-<p class="note">
-Tip: For a better estimate, use the annual income tax amount from a reliable tax calculation and enter the actual PF and CTC components shown by your employer.
-</p>
-</section>
-
-<section class="card results" aria-live="polite">
-<h2>Your salary estimate</h2>
-<p class="sub">Illustrative estimate based on the values you entered.</p>
-
-<div class="result-hero">
-<div class="label">Estimated monthly in-hand salary</div>
-<div class="amount" id="net">₹56,538</div>
-<span class="pill" id="annualNetPill">Annual take-home: ₹6,78,456</span>
-</div>
-
-<div class="metric-grid">
-<div class="metric">
-<span>Monthly CTC</span>
-<strong id="monthlyCTC">₹66,667</strong>
-</div>
-<div class="metric">
-<span>Estimated monthly gross cash</span>
-<strong id="gross">₹59,138</strong>
-</div>
-<div class="metric">
-<span>Annual in-hand estimate</span>
-<strong id="annualNet">₹6,78,456</strong>
-</div>
-<div class="metric">
-<span>Total monthly deductions</span>
-<strong id="deductions">₹2,600</strong>
-</div>
-</div>
-
-<h3 class="breakdown-title">Monthly salary breakup</h3>
-<div class="row"><span>Gross cash estimate</span><strong id="grossRow">₹59,138</strong></div>
-<div class="row"><span>Employee PF</span><strong id="pfRow">− ₹2,400</strong></div>
-<div class="row"><span>Estimated income tax</span><strong id="taxRow">− ₹0</strong></div>
-<div class="row"><span>Professional tax</span><strong id="ptRow">− ₹200</strong></div>
-<div class="row"><span>Other deductions</span><strong id="otherRow">− ₹0</strong></div>
-<div class="row"><span><strong>Estimated in-hand</strong></span><strong id="netRow">₹56,538</strong></div>
-
-<h3 class="breakdown-title">Where your CTC goes</h3>
-<div class="bar" aria-label="Illustrative salary distribution">
-<span id="cashBar" style="width:70%;background:#174ea6"></span>
-<span id="pfBar" style="width:15%;background:#2da56c"></span>
-<span id="gratuityBar" style="width:5%;background:#e9a23b"></span>
-<span id="bonusBar" style="width:10%;background:#8b72d9"></span>
-</div>
-
-<div class="legend">
-<span><i class="dot" style="background:#174ea6"></i>Cash salary</span>
-<span><i class="dot" style="background:#2da56c"></i>Employer PF</span>
-<span><i class="dot" style="background:#e9a23b"></i>Gratuity</span>
-<span><i class="dot" style="background:#8b72d9"></i>Variable pay</span>
-</div>
-
-<div class="button-row">
-<button type="button" class="primary" id="print">Print / Save PDF</button>
-<button type="button" class="secondary" id="share">Copy result</button>
-</div>
-
-<p class="note">
-Important: This is a simplified estimate, not tax or payroll advice. The calculator assumes annual variable pay is part of CTC and excludes it from regular monthly cash salary. Actual gross pay, PF basis, gratuity, tax, exemptions, bonuses and state professional tax depend on your employer's salary structure and current rules. Income tax is entered manually; it is not calculated automatically.
-</p>
-</section>
-</div>
-
-<section class="extras">
-<div class="mini">
-<h3>CTC vs In-Hand</h3>
-<p>CTC can include employer contributions and benefits that are not paid as monthly cash.</p>
-</div>
-<div class="mini">
-<h3>PF & Gratuity</h3>
-<p>Enter the components from your offer letter or salary structure for a more useful estimate.</p>
-</div>
-<div class="mini">
-<h3>Tax Estimate</h3>
-<p>Use the applicable financial year and tax regime when determining annual income tax.</p>
-</div>
-</section>
-</main>
-
-<footer>© <span id="year"></span> SalaryBatao · Salary estimates are for information only.</footer>
 
 <script>
-const $ = id => document.getElementById(id);
-
-const fields = [
-  "ctc","bonus","basicPct","employerPF","gratuity",
-  "employeePF","tax","pt","other"
-];
-
-const fmt = n => new Intl.NumberFormat("en-IN", {
-  style:"currency",
-  currency:"INR",
-  maximumFractionDigits:0
-}).format(n);
-
-function val(id) {
-  return Number($(id).value);
+function money(n) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0
+  }).format(n);
 }
 
-function calculate() {
-  const ctc = val("ctc");
-  const bonus = val("bonus");
-  const basicPct = val("basicPct");
-  const employerPF = val("employerPF");
-  const gratuity = val("gratuity");
-  const employeePF = val("employeePF");
-  const tax = val("tax");
-  const pt = val("pt");
-  const other = val("other");
+function calculateSalary() {
+  const ctc = Number(document.getElementById("ctc").value);
+  const pf = Number(document.getElementById("pf").value);
+  const tax = Number(document.getElementById("tax").value);
+  const other = Number(document.getElementById("other").value);
 
-  const all = fields.map(val);
-
-  if (
-    all.some(n => !Number.isFinite(n) || n < 0) ||
-    ctc <= 0 ||
-    basicPct > 100 ||
-    employerPF + gratuity + bonus > ctc
-  ) {
-    $("net").textContent = "Check inputs";
-    $("annualNetPill").textContent =
-      "Employer PF + gratuity + bonus cannot exceed CTC";
+  if (![ctc, pf, tax, other].every(
+    n => Number.isFinite(n) && n >= 0
+  ) || ctc <= 0) {
+    alert("Please enter valid positive salary values.");
     return;
   }
 
-  // Exclude variable pay, employer PF and gratuity from regular cash salary.
-  const annualCashGross = ctc - employerPF - gratuity - bonus;
-  const monthlyCTC = ctc / 12;
-  const gross = annualCashGross / 12;
-  const monthlyTax = tax / 12;
-  const deductions = employeePF + monthlyTax + pt + other;
-  const net = gross - deductions;
+  const monthly = ctc / 12;
+  const net = monthly - pf - tax - other;
 
-  $("rangeValue").textContent = fmt(ctc);
-  $("monthlyCTC").textContent = fmt(monthlyCTC);
-  $("gross").textContent = fmt(gross);
-  $("grossRow").textContent = fmt(gross);
-  $("pfRow").textContent = "− " + fmt(employeePF);
-  $("taxRow").textContent = "− " + fmt(monthlyTax);
-  $("ptRow").textContent = "− " + fmt(pt);
-  $("otherRow").textContent = "− " + fmt(other);
-  $("deductions").textContent = fmt(deductions);
-  $("net").textContent = fmt(net);
-  $("netRow").textContent = fmt(net);
-  $("annualNet").textContent = fmt(net * 12);
-  $("annualNetPill").textContent = "Annual take-home: " + fmt(net * 12);
-
-  const base = Math.max(ctc, 1);
-  $("cashBar").style.width = (annualCashGross / base * 100) + "%";
-  $("pfBar").style.width = (employerPF / base * 100) + "%";
-  $("gratuityBar").style.width = (gratuity / base * 100) + "%";
-  $("bonusBar").style.width = (bonus / base * 100) + "%";
+  document.getElementById("annual").textContent = money(ctc);
+  document.getElementById("monthly").textContent = money(monthly);
+  document.getElementById("net").textContent = money(net);
 }
 
-$("salaryForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  calculate();
-});
-
-fields.forEach(id => {
-  $(id).addEventListener("input", () => {
-    if (id === "ctc") {
-      $("ctcRange").value = Math.max(
-        100000,
-        Math.min(5000000, val("ctc"))
-      );
-    }
-    calculate();
-  });
-});
-
-$("ctcRange").addEventListener("input", () => {
-  $("ctc").value = $("ctcRange").value;
-  calculate();
-});
-
-$("reset").addEventListener("click", () => {
-  $("ctc").value = 800000;
-  $("bonus").value = 50000;
-  $("basicPct").value = 40;
-  $("employerPF").value = 28800;
-  $("gratuity").value = 11540;
-  $("employeePF").value = 2400;
-  $("tax").value = 0;
-  $("pt").value = 200;
-  $("other").value = 0;
-  $("ctcRange").value = 800000;
-  calculate();
-});
-
-$("print").addEventListener("click", () => window.print());
-
-$("share").addEventListener("click", async () => {
-  const text =
-    "SalaryBatao Salary Estimate\n" +
-    "Annual CTC: " + fmt(val("ctc")) + "\n" +
-    "Monthly CTC: " + $("monthlyCTC").textContent + "\n" +
-    "Estimated monthly in-hand: " + $("net").textContent;
-
-  try {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-      $("share").textContent = "Copied!";
-    } else {
-      window.prompt("Copy your salary result:", text);
-    }
-  } catch (e) {
-    window.prompt("Copy your salary result:", text);
-  }
-});
-
-$("year").textContent = new Date().getFullYear();
-calculate();
+calculateSalary();
 </script>
 </body>
 </html>
